@@ -84,7 +84,9 @@ const addEmployees = function(answer){
                     name: "nextEmployee"
                 }
         ]).then((answers) =>{
-            console.log(answers)
+            let customIntern = new Intern(answers.name,answers.id,answers.email,answers.school)
+            employees.push(customIntern)
+            console.log(employees)
         }).catch((error) => {console.log(error)})
     }
     else{
@@ -107,7 +109,7 @@ const addEmployees = function(answer){
             {
                 type:"input",
                 message:"What is their Github?",
-                name:"school"
+                name:"github"
             },
             {
                 type: "confirm",
@@ -115,7 +117,9 @@ const addEmployees = function(answer){
                 name: "nextEmployee"
             }
         ]).then((answers) => {
-            console.log(answers)
+            let customEngineer = new Engineer(answers.name,answers.id,answers.email,answers.github)
+            employees.push(customEngineer)
+            console.log(employees)
         }).catch((error) => {console.log(error)})
     }
 }

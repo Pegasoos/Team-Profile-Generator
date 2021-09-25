@@ -9,9 +9,10 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-
+    //array to store all generated employee objects for later
 const employees = [];
-    
+
+    //initial prompt for manager information, always fires first
 inquirer.prompt([
     {
         type: "input",
@@ -40,7 +41,7 @@ inquirer.prompt([
     employees.push(customManager);
     nextEmployee()
     })
-
+//function to see if add more employees or render page if the user is done
 const nextEmployee = function(){
     inquirer.prompt([
         {
@@ -57,6 +58,7 @@ const nextEmployee = function(){
             choices:["Intern", "Engineer"]
             }]).then((answer =>{addEmployees(answer)}))
         }
+        //cut off point for inquirer, renders page in output directory
         else{
             let htmlContent = render(employees)
             fs.writeFile(outputPath, htmlContent, (err) =>{
@@ -67,7 +69,7 @@ const nextEmployee = function(){
         }
     }).catch((error) => console.log(error))
 }
-
+// function fires if user chiises to add another employee, handles employee class and changes questions accordingly
 const addEmployees = function(answer){
     if(answer.occupation === "Intern"){
         inquirer.prompt([
@@ -128,9 +130,3 @@ const addEmployees = function(answer){
         }).catch((error) => console.log(error))
     }
 }
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.

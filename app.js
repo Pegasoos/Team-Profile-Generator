@@ -9,6 +9,8 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+
+const employees = [];
 inquirer.prompt([
     {
         type: "input",
@@ -32,7 +34,8 @@ inquirer.prompt([
     }
 ]).then((answers) =>{
     let customManager = new Manager(answers.name,answers.id,answers.email,answers.officeNumber);
-    console.log(customManager)
+    employees.push(customManager)
+    console.log(employees)
 }).catch((error)=>{
     console.log(error)
 })

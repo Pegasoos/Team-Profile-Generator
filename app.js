@@ -57,7 +57,14 @@ const nextEmployee = function(){
             choices:["Intern", "Engineer"]
             }]).then((answer =>{addEmployees(answer)}))
         }
-        else{console.log(render(employees))}
+        else{
+            let htmlContent = render(employees)
+            fs.writeFile(outputPath, htmlContent, (err) =>{
+                if(err){
+                    throw err;
+                }
+            })
+        }
     }).catch((error) => console.log(error))
 }
 

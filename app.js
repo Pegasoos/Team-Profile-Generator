@@ -11,6 +11,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
 const employees = [];
+    
 inquirer.prompt([
     {
         type: "input",
@@ -34,28 +35,39 @@ inquirer.prompt([
     },
     {
         type: "confirm",
-        message:"Would you like to add more employees?",
+        message:"Would you like to add another employee?",
         name: "nextEmployee"
     }
 ]).then((answers) =>{
+    //create new manager with inquirer input as params
     let customManager = new Manager(answers.name,answers.id,answers.email,answers.officeNumber);
-    employees.push(customManager)
-    console.log(employees)
+    //add new manager to employees array to feed to render later
+    employees.push(customManager);
     if(answers.nextEmployee){
-        console.log("Good to go!")
+        inquirer.prompt([{
+            type:"list",
+            message:"Are they an Intern or an Engineer?",
+            name:"occupation",
+            choices:["Intern", "Engineer"]
+        }]).then((answer) => {
+            addEmployees(answer)
+        })
     }
-}).catch((error)=>{
-    console.log(error)
 })
+
+const addEmployees = function(answer){
+    if(answer.occupation === "Intern"){
+        console.log("Intern")
+    }
+    else{
+        console.log("Engineer")
+    }
+}
 //Inquirer Question Flow: Create Array of Employees From User Responses
-//Would you like to add another employee? Confirm Y/N
 //What is their role? Multiple Choice with Engineer or Intern
 //Intern: What is their name? What us their id? What is their email? What is their school?
 //Engineer: What is their name? What us their id? What is their email? What is their github?
 // call render function from above with array of employees
-
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will

@@ -33,27 +33,33 @@ inquirer.prompt([
         message:"What is their office number?",
         name:"officeNumber"
     },
-    {
-        type: "confirm",
-        message:"Would you like to add another employee?",
-        name: "nextEmployee"
-    }
 ]).then((answers) =>{
     //create new manager with inquirer input as params
     let customManager = new Manager(answers.name,answers.id,answers.email,answers.officeNumber);
     //add new manager to employees array to feed to render later
     employees.push(customManager);
-    if(answers.nextEmployee){
-        inquirer.prompt([{
-            type:"list",
+    nextEmployee()
+    })
+
+const nextEmployee = function(){
+    inquirer.prompt([
+        {
+            type:"confirm",
+            message:"Would you like to add another employee?",
+            name:"nextEmployee"
+        }
+    ]).then((answers) => {
+        if(answers.nextEmployee){
+            inquirer.prompt([{
+                type:"list",
             message:"Are they an Intern or an Engineer?",
             name:"occupation",
             choices:["Intern", "Engineer"]
-        }]).then((answer) => {
-            addEmployees(answer)
-        }).catch((error) => {console.log(error)})
-    }
-})
+            }]).then((answer =>{addEmployees(answer)}))
+        }
+        else{return employees}
+    }).catch((error) => console.log(error))
+}
 
 const addEmployees = function(answer){
     if(answer.occupation === "Intern"){
@@ -78,16 +84,12 @@ const addEmployees = function(answer){
                     message:"What school do they go to?",
                     name:"school"
                 },
-                {
-                    type: "confirm",
-                    message:"Would you like to add another employee?",
-                    name: "nextEmployee"
-                }
         ]).then((answers) =>{
             let customIntern = new Intern(answers.name,answers.id,answers.email,answers.school)
             employees.push(customIntern)
             console.log(employees)
-        }).catch((error) => {console.log(error)})
+            nextEmployee();
+        }).catch((error) => console.log(error))
     }
     else{
         inquirer.prompt([
@@ -111,22 +113,14 @@ const addEmployees = function(answer){
                 message:"What is their Github?",
                 name:"github"
             },
-            {
-                type: "confirm",
-                message:"Would you like to add another employee?",
-                name: "nextEmployee"
-            }
         ]).then((answers) => {
             let customEngineer = new Engineer(answers.name,answers.id,answers.email,answers.github)
             employees.push(customEngineer)
             console.log(employees)
-        }).catch((error) => {console.log(error)})
+            nextEmployee();
+        }).catch((error) => console.log(error))
     }
 }
-//Inquirer Question Flow: Create Array of Employees From User Responses
-//What is their role? Multiple Choice with Engineer or Intern
-//Intern: What is their name? What us their id? What is their email? What is their school?
-//Engineer: What is their name? What us their id? What is their email? What is their github?
 // call render function from above with array of employees
 
 // After the user has input all employees desired, call the `render` function (required

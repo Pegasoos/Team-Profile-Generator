@@ -1,0 +1,25 @@
+body{
+    background-image: url("./assets/techbackground.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height:100%;
+    width:100%;
+}
+h1{
+    color:white;
+}
+h2{
+    color:white;
+}
+h3{
+    color:white;
+}
+.team-heading{
+    background-color:#050A30
+}
+.card-header{
+    background-color:#000C66
+}
+.card {
+    margin-left: 5%;
+}

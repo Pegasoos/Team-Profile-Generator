@@ -28,15 +28,15 @@ inquirer.prompt([
     {
         type:"input",
         message:"What is their office number?",
-        name:"office number"
+        name:"officeNumber"
     }
 ]).then((answers) =>{
-    console.log(answers)
+    let customManager = new Manager(answers.name,answers.id,answers.email,answers.officeNumber);
+    console.log(customManager)
 }).catch((error)=>{
     console.log(error)
 })
 //Inquirer Question Flow: Create Array of Employees From User Responses
-//Who is the Manager? What is their name? What us their id? What is their email? What is their office number?
 //Would you like to add another employee? Confirm Y/N
 //What is their role? Multiple Choice with Engineer or Intern
 //Intern: What is their name? What us their id? What is their email? What is their school?

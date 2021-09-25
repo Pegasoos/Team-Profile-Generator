@@ -12,6 +12,7 @@
  7. [Questions](#questions)
 
 ## Description
+[![Team Profile Generator](https://res.cloudinary.com/marcomontalbano/image/upload/v1632602321/video_to_markdown/images/youtube---67Z6WguH0M-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/-67Z6WguH0M "Team Profile Generator")
 ### This a CLI application designed to create a team profile web page based on user input. The user first creates a profile for the manager of the project or organization, then creates as many Engineers or Interns as they need profiles for. Javascript then renders an HTML5 page with team profiles containing the information the user entered for each employee.
 ## Installation
 ### Install the files from the Github Repository, then initialize an npm repository in the same directory as app.js and install inquirer, fs, and path.

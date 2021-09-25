@@ -51,16 +51,72 @@ inquirer.prompt([
             choices:["Intern", "Engineer"]
         }]).then((answer) => {
             addEmployees(answer)
-        })
+        }).catch((error) => {console.log(error)})
     }
 })
 
 const addEmployees = function(answer){
     if(answer.occupation === "Intern"){
-        console.log("Intern")
+        inquirer.prompt([
+                {
+                    type: "input",
+                    message: "Who is this intern?",
+                    name: "name" 
+                },
+                {
+                    type:"input",
+                    message: "What is their id number?",
+                    name: "id"
+                },
+                {
+                    type:"input",
+                    message:"What is their email?",
+                    name:"email"
+                },
+                {
+                    type:"input",
+                    message:"What school do they go to?",
+                    name:"school"
+                },
+                {
+                    type: "confirm",
+                    message:"Would you like to add another employee?",
+                    name: "nextEmployee"
+                }
+        ]).then((answers) =>{
+            console.log(answers)
+        }).catch((error) => {console.log(error)})
     }
     else{
-        console.log("Engineer")
+        inquirer.prompt([
+            {
+                type: "input",
+                message: "Who is this engineer?",
+                name: "name" 
+            },
+            {
+                type:"input",
+                message: "What is their id number?",
+                name: "id"
+            },
+            {
+                type:"input",
+                message:"What is their email?",
+                name:"email"
+            },
+            {
+                type:"input",
+                message:"What is their Github?",
+                name:"school"
+            },
+            {
+                type: "confirm",
+                message:"Would you like to add another employee?",
+                name: "nextEmployee"
+            }
+        ]).then((answers) => {
+            console.log(answers)
+        }).catch((error) => {console.log(error)})
     }
 }
 //Inquirer Question Flow: Create Array of Employees From User Responses

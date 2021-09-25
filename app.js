@@ -31,11 +31,19 @@ inquirer.prompt([
         type:"input",
         message:"What is their office number?",
         name:"officeNumber"
+    },
+    {
+        type: "confirm",
+        message:"Would you like to add more employees?",
+        name: "nextEmployee"
     }
 ]).then((answers) =>{
     let customManager = new Manager(answers.name,answers.id,answers.email,answers.officeNumber);
     employees.push(customManager)
     console.log(employees)
+    if(answers.nextEmployee){
+        console.log("Good to go!")
+    }
 }).catch((error)=>{
     console.log(error)
 })
